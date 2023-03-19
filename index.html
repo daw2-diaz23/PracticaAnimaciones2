@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://kit.fontawesome.com/55a99b72b7.js" crossorigin="anonymous"></script>
+    <title>Transiciones</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: brown;
+        height: 200px;
+      }
+      h1 {
+        font-size: 3em;
+        color: aliceblue;
+        transition: all 2s steps(5);
+      }
+      .imagen  {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        transform: translateX(-50%) translateY(50%);
+        width: 150px;
+        height: 200px;
+        border: 2px solid;
+        box-shadow: 5px 10px 50px;
+        background-size: cover;
+        visibility: hidden;
+        transition: 0.5s;
+        transform-style: preserve-3d;
+      }
+
+      .imagen.flipped {
+        transform: translateX(-50%) translateY(-50%) rotateY(180deg) perspective(1000px);
+        backface-visibility: visible;
+        visibility: visible;
+      }
+
+      header.clicked .imagen {
+        visibility: visible;
+        transform: translateX(-50%) translateY(-50%);
+        transition: 0.5s;
+        animation: cambia-fotos 5s linear 0.1s infinite alternate forwards;
+
+      }
+      .ocultar {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 10px;
+        background-color: brown;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: opacity 0.3s;
+        
+      }
+     
+      .imagen.oculta {
+        opacity: 0;
+        visibility: hidden;
+        
+      } 
+    
+      @keyframes cambia-fotos{
+            0%{
+                background-image: url('https://d3ugyf2ht6aenh.cloudfront.net/stores/884/897/products/bd397433-2e97-4933-9693-c70b92cf5d9c-fedb297e2c477de82716570522203664-1024-1024.webp');
+
+            }
+            50%{
+                background-image: url('https://cdn.sincroguia.tv/uploads/series/bob-esponja-poster-13047_V.jpg');
+
+            }
+            100%{
+                background-image: url('https://cdn.sincroguia.tv/uploads/programs/b/o/b/bob-esponja-single-story-poster-727374_SPA-46_V.jpg');
+
+            }
+      }
+      .imagen .back {
+        display: none;
+        transform: rotateY(180deg);
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        color: black;
+      }
+
+      .imagen.flipped .back {
+        display: block; 
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Transiciones y efectos css</h1>
+      <div class="imagen">
+        <div class="back">
+          <p>Pau Diaz</p>
+          <i class="fa-solid fa-arrow-down ocultar"></i>
+        </div>
+      </div>
+    </header>
+
+
+    <script>
+      // Selecciona el elemento 'header' del documento HTML y lo asigna a la constante 'header'
+      const header = document.querySelector('header'); 
+       header.addEventListener('click', () => { //Sirve para escuchar el evento clic
+          header.classList.toggle('clicked'); //se utiliza para alternar la presencia de una clase CSS en un elemento HTML.
+      });
+
+
+      const imagen = document.querySelector('.imagen');//Selecciona el elemento 'imagen' del documento HTML y lo asigna a la constante 'imagen'
+        imagen.addEventListener('click', () => {//Sirve para escuchar el evento clic
+          imagen.classList.toggle('flipped'); // se utiliza para alternar la presencia de una clase CSS en un elemento HTML.
+      });
+
+      const botonOcultar = document.querySelector('.ocultar');//Selecciona el elemento 'oculta' del documento HTML y lo asigna a la constante 'botonOcultar'
+      const imagen2 = document.querySelector('.imagen');//Selecciona el elemento 'imagen' del documento HTML y lo asigna a la constante 'imagen2'
+        botonOcultar.addEventListener('click', () => {//Sirve para escuchar el evento clic
+          imagen2.classList.add('oculta');//Añade la clase oculta
+      });
+    </script>
+  </body>
+</html>
